@@ -14,7 +14,6 @@ Antes de ejecutarlo, asegúrate de tener Flutter instalado y configurado correct
 >flutter pub get
 >```
 
-text
 
 ### ⚙️ Generación de archivos necesarios
 >Es necesario generar el app_database.g.dart con el siguiente comando
