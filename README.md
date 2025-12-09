@@ -1,16 +1,23 @@
 # cuban_seller
 
-A new Flutter project.
+Un nuevo proyecto Flutter.
 
-## Getting Started
+## 🚀 Primeros pasos
 
-This project is a starting point for a Flutter application.
+Este proyecto es un punto de partida para tu aplicación Flutter.  
+Antes de ejecutarlo, asegúrate de tener Flutter instalado y configurado correctamente.
 
-A few resources to get you started if this is your first Flutter project:
+### 🧩 Instalación de dependencias
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+>Ejecuta el siguiente comando para obtener todas las dependencias del proyecto:
+>```
+>flutter pub get
+>```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+text
+
+### ⚙️ Generación de archivos necesarios
+>Es necesario generar el app_database.g.dart con el siguiente comando
+>```
+>dart run build_runner build
+>```
