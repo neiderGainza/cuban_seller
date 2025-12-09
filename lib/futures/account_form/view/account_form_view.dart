@@ -1,10 +1,16 @@
+import 'package:cuban_seller/futures/account_form/view_model/account_form_cubit.dart';
 import 'package:flutter/material.dart';
 
 
 class AccountFormView extends StatefulWidget{
   const AccountFormView({
-    super.key
-  });
+    super.key,
+    accountRepository,
+    coinRepository
+  }): _accountRepository = accountRepository, _coinRepository = coinRepository;
+
+  final _accountRepository;
+  final _coinRepository;
 
   @override
   State<AccountFormView> createState() => _AccountFormViewState();
@@ -13,18 +19,29 @@ class AccountFormView extends StatefulWidget{
 
 class _AccountFormViewState extends State<AccountFormView> {
   final _nameController    = TextEditingController();
-  final _coinController    = TextEditingController();
   final _balanceController = TextEditingController();
 
+  late AccountFormCubit _accountFormCubit;
 
   @override
   void initState() {
-    _balanceController.text = "0.00";
+    _accountFormCubit = AccountFormCubit(
+      accountRepository: widget._accountRepository,
+      coinRepository: widget._coinRepository
+    );
+
+    _balanceController.text = '0.00';
+    _balanceController.addListener(
+      () => _accountFormCubit.onBalanceChanged(_balanceController.text) 
+    );
+
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
+    
     return AlertDialog(
       title: Text("Agregar nueva cuenta"),
       content: Form(

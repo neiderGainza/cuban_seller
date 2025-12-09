@@ -6,12 +6,14 @@ import 'package:cuban_seller/futures/form_fields/name.dart';
 
 class AccountFormCubit extends Cubit<AccountFormState>{
   final _accountRepository;
+  final _coinRepository;
 
   AccountFormCubit({
     accountRepository,
-  }): _accountRepository = accountRepository,
+    coinRepository
+  }): _accountRepository = accountRepository, _coinRepository = coinRepository,
   super( 
-    const AccountFormState(name: Name.unvalidated(), balance: Balance.unvalidated())
+    const AccountFormState(name: Name.unvalidated(), balance: Balance.unvalidated(), coin: 'CUP')
   );
 
 
@@ -27,7 +29,7 @@ class AccountFormCubit extends Cubit<AccountFormState>{
   }
 
 
-  void onBalanceChanged(int newValue){
+  void onBalanceChanged(String newValue){
     final newBalance = (state.balance.error == null)
     ? Balance.unvalidated(newValue)
     : Balance.validated(newValue);
@@ -37,5 +39,9 @@ class AccountFormCubit extends Cubit<AccountFormState>{
     );
   }
 
-  
+  void onValidate(){
+    print('Hola');  
+  } 
+
+
 }

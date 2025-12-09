@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 class CubanSellerTopNavigationBar extends StatefulWidget implements PreferredSizeWidget{
   const CubanSellerTopNavigationBar({
     super.key,
-    required this.theme
+    required this.theme,
+    required this.navigationFunction
   });
 
   final ThemeData theme;
+  final void Function(int actualPage, int futurePage, BuildContext context) navigationFunction;
+
 
   @override
   State<CubanSellerTopNavigationBar> createState() => _CubanSellerTopNavigationBarState();
@@ -19,10 +22,6 @@ class CubanSellerTopNavigationBar extends StatefulWidget implements PreferredSiz
 class _CubanSellerTopNavigationBarState extends State<CubanSellerTopNavigationBar> {
   int selectedIndex = 0;
 
-  void onSelectIndex(int index){
-    selectedIndex = index;
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,11 @@ class _CubanSellerTopNavigationBarState extends State<CubanSellerTopNavigationBa
             ])
 
             FilledButton(
-              onPressed: () => onSelectIndex(index),
+              onPressed: (){
+                widget.navigationFunction(selectedIndex, index, context);
+                selectedIndex = index;
+                setState((){});
+              },
               child: MenuItem(
                 iconData: iconData, 
                 label: label,

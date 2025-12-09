@@ -1,15 +1,19 @@
 import 'package:formz/formz.dart';
 
-class Balance extends FormzInput<int, BalanceValidationError>{
-  const Balance.validated(  [int value = 0]):super.pure(value);
-  const Balance.unvalidated([int value = 0]):super.dirty(value); 
+class Balance extends FormzInput<String, BalanceValidationError>{
+  const Balance.validated(  [String value = '0.00']):super.pure(value);
+  const Balance.unvalidated([String value = '0.00']):super.dirty(value); 
 
 
   @override
-  BalanceValidationError? validator(int value) {
-    return (value < 0)
-           ?BalanceValidationError.negativeAmount
-           :null;
+  BalanceValidationError? validator(String value) {
+    final _value = double.tryParse(value);
+    
+    return (_value == null)
+    ? BalanceValidationError.mostBeNumber
+    : (_value < 0)
+        ?BalanceValidationError.negativeAmount
+        :null; 
   }
 }
 
@@ -18,7 +22,8 @@ class Balance extends FormzInput<int, BalanceValidationError>{
 
 enum BalanceValidationError{
   negativeAmount(errorMessage: "No puedes crear una cuenta en negativos"),
-  empty(errorMessage: "Debes especificar un valor")
+  empty(errorMessage: "Debes especificar un valor"),
+  mostBeNumber(errorMessage: "The amount must be a number")
   ;
 
   final String ? errorMessage;

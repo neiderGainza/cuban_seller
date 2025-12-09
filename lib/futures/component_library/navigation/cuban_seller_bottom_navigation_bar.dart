@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class CubanSellerBottomNavigationBar extends StatefulWidget{
   const CubanSellerBottomNavigationBar({
     super.key,
-    required this.theme
+    required this.theme,
+    required this.navigationFunction
   });
 
   final ThemeData theme;
+  final void Function(int actualPage, int futurePage, BuildContext context) navigationFunction;
 
   @override
   State<CubanSellerBottomNavigationBar> createState() => _CubanSellerBottomNavigationBarState();
@@ -16,12 +18,6 @@ class CubanSellerBottomNavigationBar extends StatefulWidget{
 class _CubanSellerBottomNavigationBarState extends State<CubanSellerBottomNavigationBar> {
   int selectedIndex = 0;
 
-  void onSelectIndex(int index){
-    selectedIndex = index;
-    setState(() {
-      
-    });
-  } 
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +31,11 @@ class _CubanSellerBottomNavigationBarState extends State<CubanSellerBottomNaviga
 
       showUnselectedLabels: true,
       
-      onTap: onSelectIndex,
+      onTap: (index){
+        widget.navigationFunction(selectedIndex, index, context);
+        selectedIndex = index;
+        setState((){});
+      },
       currentIndex: selectedIndex,
 
       items: <BottomNavigationBarItem>[
@@ -48,6 +48,5 @@ class _CubanSellerBottomNavigationBarState extends State<CubanSellerBottomNaviga
         BottomNavigationBarItem(icon: icon, label: label, backgroundColor: colors.primary),
       ],
     );
-
   }
 }
