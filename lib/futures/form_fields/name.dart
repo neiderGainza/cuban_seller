@@ -19,8 +19,13 @@ class Name extends FormzInput<String, NameValidationError>{
 
   @override
   NameValidationError ? validator(String value){
-    throw UnimplementedError();
+    return (value.trim() == '')
+          ? NameValidationError.empty
+          : (value.length < 3)
+            ? NameValidationError.tooShort
+            :null;
   }
+
 }
 
 
@@ -29,7 +34,7 @@ class Name extends FormzInput<String, NameValidationError>{
 enum NameValidationError{
   empty(errorMessage:"Un nombre es requerido"),
   alreadyInUse(errorMessage: "Nombre en uso"),
-  invalid(errorMessage: "Nombre no valido");
+  tooShort(errorMessage: "El nombre debe tener más de 3 caracteres");
 
 
   final String ? errorMessage;

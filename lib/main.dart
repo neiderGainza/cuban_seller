@@ -1,12 +1,9 @@
+import 'package:cuban_seller/futures/account_form/view/account_form_view.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-
-
   runApp(const CubanSeller());
 }
-
-
 
 
 class CubanSeller extends StatelessWidget {
@@ -16,13 +13,11 @@ class CubanSeller extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
       ),
-      home: Center(
-        child: Text("hello"),
-      ),
+
+      home: AccountFormView(),
     );
   }
 }

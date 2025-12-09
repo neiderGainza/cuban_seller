@@ -7,7 +7,9 @@ class Balance extends FormzInput<int, BalanceValidationError>{
 
   @override
   BalanceValidationError? validator(int value) {
-    throw UnimplementedError();
+    return (value < 0)
+           ?BalanceValidationError.negativeAmount
+           :null;
   }
 }
 
