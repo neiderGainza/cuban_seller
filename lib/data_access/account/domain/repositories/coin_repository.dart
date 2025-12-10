@@ -1,5 +1,5 @@
-import 'package:cuban_seller/features/account/domain/entities/coin.dart';
-import 'package:cuban_seller/features/account/domain/usecases/insert_coin_usecases.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_coin_usecases.dart';
 
 abstract class CoinRepository {
   Future<Coin> insertCoin(CoinParameters value);

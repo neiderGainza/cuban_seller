@@ -1,4 +1,4 @@
-import 'package:cuban_seller/features/account/domain/repositories/account_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/account_repository.dart';
 
 class DeleteAccountUsecases {
   final AccountRepository repository;

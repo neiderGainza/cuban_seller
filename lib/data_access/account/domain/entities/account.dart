@@ -1,4 +1,4 @@
-import 'package:cuban_seller/features/account/domain/entities/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/coin.dart';
 
 class Account {
   final int id;

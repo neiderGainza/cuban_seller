@@ -1,6 +1,6 @@
-import 'package:cuban_seller/features/account/data/datasources/local/app_database.dart';
-import 'package:cuban_seller/features/account/domain/entities/coin.dart';
-import 'package:cuban_seller/features/account/domain/usecases/insert_coin_usecases.dart';
+import 'package:cuban_seller/data_access/account/data/datasources/local/app_database.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_coin_usecases.dart';
 import 'package:drift/drift.dart';
 
 class CoinMapper {

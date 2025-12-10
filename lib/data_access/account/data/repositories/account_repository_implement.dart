@@ -1,8 +1,8 @@
-import 'package:cuban_seller/features/account/data/datasources/local/app_database.dart';
-import 'package:cuban_seller/features/account/domain/entities/account.dart';
-import 'package:cuban_seller/features/account/domain/repositories/account_repository.dart';
-import 'package:cuban_seller/features/account/domain/usecases/insert_account_usecases.dart';
-import 'package:cuban_seller/features/account/domain/usecases/update_account_usecases.dart';
+import 'package:cuban_seller/data_access/account/data/datasources/local/app_database.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/account.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/account_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_account_usecases.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/update_account_usecases.dart';
 
 class AccountRepositoryImplement implements AccountRepository {
   final AppDatabase _appDatabase;

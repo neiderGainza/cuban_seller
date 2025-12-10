@@ -1,5 +1,5 @@
-import 'package:cuban_seller/features/account/domain/repositories/coin_repository.dart';
-import 'package:cuban_seller/features/account/domain/usecases/insert_coin_usecases.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/coin_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_coin_usecases.dart';
 
 class DeleteCoinUsecases {
   final CoinRepository repository;

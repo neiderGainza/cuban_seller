@@ -5,18 +5,18 @@ import 'package:drift/native.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import 'package:cuban_seller/features/account/data/mapper/account_mapper.dart';
-import 'package:cuban_seller/features/account/data/mapper/coin_mapper.dart';
+import 'package:cuban_seller/data_access/account/data/mapper/account_mapper.dart';
+import 'package:cuban_seller/data_access/account/data/mapper/coin_mapper.dart';
 
-import 'package:cuban_seller/features/account/data/models/account_model.dart';
-import 'package:cuban_seller/features/account/data/models/coin_model.dart';
+import 'package:cuban_seller/data_access/account/data/models/account_model.dart';
+import 'package:cuban_seller/data_access/account/data/models/coin_model.dart';
 
-import 'package:cuban_seller/features/account/domain/entities/account.dart';
-import 'package:cuban_seller/features/account/domain/entities/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/account.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/coin.dart';
 
-import 'package:cuban_seller/features/account/domain/usecases/insert_account_usecases.dart';
-import 'package:cuban_seller/features/account/domain/usecases/update_account_usecases.dart';
-import 'package:cuban_seller/features/account/domain/usecases/insert_coin_usecases.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_account_usecases.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/update_account_usecases.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_coin_usecases.dart';
 
 part 'app_database.g.dart';
 

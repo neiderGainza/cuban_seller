@@ -1,6 +1,6 @@
-import 'package:cuban_seller/features/account/domain/entities/account.dart';
-import 'package:cuban_seller/features/account/domain/entities/coin.dart';
-import 'package:cuban_seller/features/account/domain/repositories/account_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/account.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/account_repository.dart';
 
 class InsertAccountUsecases {
   final AccountRepository repository;
