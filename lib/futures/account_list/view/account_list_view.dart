@@ -10,9 +10,8 @@ class AccountListView extends StatelessWidget{
     required this.onAddNewAccount,
   });
 
-
   final void Function() onAddNewAccount;
-  
+
 
   @override
   Widget build(BuildContext context){

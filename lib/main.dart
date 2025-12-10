@@ -1,5 +1,6 @@
 import 'package:cuban_seller/futures/account_form/view/account_form_view.dart';
 import 'package:cuban_seller/futures/account_list/view/account_list_view.dart';
+import 'package:cuban_seller/futures/coin_form/view/coin_form_view.dart';
 import 'package:cuban_seller/futures/component_library/navigation/navigation_frame.dart';
 import 'package:cuban_seller/futures/product_list/view/product_list_view.dart';
 import 'package:cuban_seller/futures/sell_list/view/sell_list_view.dart';
@@ -42,12 +43,16 @@ final router = GoRouter(
           path: '/',
           builder: (context, state) => AccountListView(
             onAddNewAccount: 
-            () =>
-              showDialog(
+            () => showDialog(
                 context: context, 
-                builder: (context) => AccountFormView()
-              )
-
+                builder: (context) => AccountFormView(
+                  onAddNewCoin: 
+                  () => showDialog<String>(
+                    context: context, 
+                    builder: (context) => CoinFormView()
+                  ),
+                )
+              ),
           ),
         ),
         
