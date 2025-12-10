@@ -1,13 +1,15 @@
 import 'package:bloc/bloc.dart';
-import 'package:cuban_seller/futures/coin_form/viewmodel/coin_form_state.dart';
-import 'package:cuban_seller/futures/form_fields/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/coin_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_coin_usecases.dart';
+import 'package:cuban_seller/features/coin_form/viewmodel/coin_form_state.dart';
+import 'package:cuban_seller/features/form_fields/coin.dart';
 
 
 class CoinFormCubit extends Cubit<CoinFormState>{
   
-  CoinFormCubit(
-    coinRepository
-  ) : _coinRepository = coinRepository, 
+  CoinFormCubit({
+    required CoinRepository coinRepository
+  }) : _coinRepository = coinRepository, 
   super(
     CoinFormState(
       coin: CoinFormField.unvalidated(), 
@@ -15,7 +17,7 @@ class CoinFormCubit extends Cubit<CoinFormState>{
     )
   );
 
-  final _coinRepository;
+  final CoinRepository _coinRepository;
 
   CoinFormField _validateCoinIfNecesary(String newValue, [bool forceValidation = false]){
     // aqui validaciones con el backend 
@@ -35,11 +37,14 @@ class CoinFormCubit extends Cubit<CoinFormState>{
 
   
 
-  onValidate(){
+  onValidate() async {
     final coin = _validateCoinIfNecesary(state.coin.value, true);
     
     if(coin.isValid){
-      // aqui se inserta 
+      // hara falta un try??
+      _coinRepository.insertCoin(
+        CoinParameters(value: coin.value)
+      );
     }
 
     emit(

@@ -1,19 +1,23 @@
 import 'package:bloc/bloc.dart';
-import 'package:cuban_seller/futures/account_form/view_model/account_form_state.dart';
-import 'package:cuban_seller/futures/form_fields/balance.dart';
-import 'package:cuban_seller/futures/form_fields/coin.dart';
-import 'package:cuban_seller/futures/form_fields/name.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/account_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/coin_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/usecases/insert_account_usecases.dart';
+import 'package:cuban_seller/features/account_form/view_model/account_form_state.dart';
+import 'package:cuban_seller/features/form_fields/balance.dart';
+import 'package:cuban_seller/features/form_fields/coin.dart';
+import 'package:cuban_seller/features/form_fields/name.dart';
 import 'package:formz/formz.dart';
 
 
 class AccountFormCubit extends Cubit<AccountFormState>{
-  final _accountRepository;
-  final _coinRepository;
+  final AccountRepository _accountRepository;
+  final CoinRepository _coinRepository;
   final _account;
 
   AccountFormCubit({
-    accountRepository,
-    coinRepository,
+    required AccountRepository accountRepository,
+    required CoinRepository coinRepository,
 
     account
   }): _accountRepository = accountRepository, _coinRepository = coinRepository, _account = account,
@@ -41,9 +45,10 @@ class AccountFormCubit extends Cubit<AccountFormState>{
 
   // leer de manera asincrona las coins
   void getCoins() async {
-    // coger las coins del repositorio
+    final coins = await _coinRepository.getAllCoins();
     emit(
       state.copyWith(
+        coins: coins,
         submitionStatus: SubmitionStatus.loaded
       )
     );
@@ -85,7 +90,7 @@ class AccountFormCubit extends Cubit<AccountFormState>{
     emit(
       state.copyWith(
         coin: _validateCoinIfNecesary(value),
-        coins: [...state.coins, value]
+        coins: [...state.coins, Coin(value: value)]
       )
     );
   }
@@ -105,7 +110,14 @@ class AccountFormCubit extends Cubit<AccountFormState>{
     ]);    
 
     if (isFormValid){
-      // insertar el form
+      _accountRepository.insertAccount(
+        // should i put a try
+        InsertAccountParam(
+          name: name.value,
+          amount: double.parse( balance.value ), 
+          coin: Coin(value: coin.value)
+        )
+      );
       // si _account != null update on account_id
     }
 

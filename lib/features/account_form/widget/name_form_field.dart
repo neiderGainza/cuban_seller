@@ -1,5 +1,5 @@
-import 'package:cuban_seller/futures/account_form/view_model/account_form_cubit.dart';
-import 'package:cuban_seller/futures/account_form/view_model/account_form_state.dart';
+import 'package:cuban_seller/features/account_form/view_model/account_form_cubit.dart';
+import 'package:cuban_seller/features/account_form/view_model/account_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

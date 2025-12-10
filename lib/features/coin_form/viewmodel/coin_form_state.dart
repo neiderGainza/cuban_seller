@@ -1,4 +1,4 @@
-import 'package:cuban_seller/futures/form_fields/coin.dart';
+import 'package:cuban_seller/features/form_fields/coin.dart';
 
 
 class CoinFormState {

@@ -1,5 +1,5 @@
-import 'package:cuban_seller/futures/component_library/navigation/cuban_seller_bottom_navigation_bar.dart';
-import 'package:cuban_seller/futures/component_library/navigation/cuban_seller_top_navigation_bar.dart';
+import 'package:cuban_seller/features/component_library/navigation/cuban_seller_bottom_navigation_bar.dart';
+import 'package:cuban_seller/features/component_library/navigation/cuban_seller_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 

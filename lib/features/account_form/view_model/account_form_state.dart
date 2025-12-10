@@ -1,6 +1,7 @@
-import 'package:cuban_seller/futures/form_fields/balance.dart';
-import 'package:cuban_seller/futures/form_fields/coin.dart';
-import 'package:cuban_seller/futures/form_fields/name.dart';
+import 'package:cuban_seller/data_access/account/domain/entities/coin.dart';
+import 'package:cuban_seller/features/form_fields/balance.dart';
+import 'package:cuban_seller/features/form_fields/coin.dart';
+import 'package:cuban_seller/features/form_fields/name.dart';
 
 
 class AccountFormState {
@@ -9,7 +10,7 @@ class AccountFormState {
   final CoinFormField coin;
   
   final SubmitionStatus submitionStatus;
-  final List<String> coins;
+  final List<Coin> coins;
 
   const AccountFormState({
     required this.name,
@@ -27,7 +28,7 @@ class AccountFormState {
     CoinFormField ? coin,
     
     SubmitionStatus ? submitionStatus,
-    List<String> ? coins 
+    List<Coin> ? coins 
   }){
     return AccountFormState(
       name: name ?? this.name,

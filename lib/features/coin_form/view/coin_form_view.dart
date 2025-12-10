@@ -1,6 +1,6 @@
-import 'package:cuban_seller/futures/coin_form/viewmodel/coin_form_cubit.dart';
-import 'package:cuban_seller/futures/coin_form/viewmodel/coin_form_state.dart';
-import 'package:cuban_seller/futures/form_fields/coin.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/coin_repository.dart';
+import 'package:cuban_seller/features/coin_form/viewmodel/coin_form_cubit.dart';
+import 'package:cuban_seller/features/coin_form/viewmodel/coin_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,10 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CoinFormView extends StatefulWidget{
   const CoinFormView({
     super.key,
-    coinRepository
+    required CoinRepository coinRepository
   }): _coinRepository = coinRepository;
 
-  final _coinRepository;
+  final CoinRepository _coinRepository;
 
   @override
   State<CoinFormView> createState() => _CoinFormViewState();
@@ -24,7 +24,7 @@ class _CoinFormViewState extends State<CoinFormView> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = CoinFormCubit(widget._coinRepository);
+    final cubit = CoinFormCubit(coinRepository: widget._coinRepository);
 
     return BlocConsumer<CoinFormCubit, CoinFormState>(
       bloc: cubit,

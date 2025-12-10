@@ -1,7 +1,10 @@
-import 'package:cuban_seller/futures/account_form/view_model/account_form_cubit.dart';
-import 'package:cuban_seller/futures/account_form/widget/balance_form_field.dart';
-import 'package:cuban_seller/futures/account_form/widget/coin_picker.dart';
-import 'package:cuban_seller/futures/account_form/widget/name_form_field.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/account_repository.dart';
+import 'package:cuban_seller/data_access/account/domain/repositories/coin_repository.dart';
+import 'package:cuban_seller/features/account_form/view_model/account_form_cubit.dart';
+import 'package:cuban_seller/features/account_form/view_model/account_form_state.dart';
+import 'package:cuban_seller/features/account_form/widget/balance_form_field.dart';
+import 'package:cuban_seller/features/account_form/widget/coin_picker.dart';
+import 'package:cuban_seller/features/account_form/widget/name_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,18 +12,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AccountFormView extends StatefulWidget{
   const AccountFormView({
     super.key,
-    accountRepository,
-    coinRepository,
+    required AccountRepository accountRepository,
+    required CoinRepository    coinRepository,
 
     required this.onAddNewCoin
   }): _accountRepository = accountRepository, _coinRepository = coinRepository;
 
 
-  final _accountRepository;
-  final _coinRepository;
+  final AccountRepository _accountRepository;
+  final CoinRepository _coinRepository;
 
-  final Future<String?> Function() onAddNewCoin;
-
+  final Future<String?> Function(BuildContext context) onAddNewCoin;
 
 
   @override
@@ -54,7 +56,7 @@ class _AccountFormViewState extends State<AccountFormView> {
     
     return BlocProvider<AccountFormCubit>(
       create: (context) => _accountFormCubit,
-
+      
       child : AlertDialog(
         title: Text("Agregar nueva cuenta"),
         
@@ -91,6 +93,17 @@ class _AccountFormViewState extends State<AccountFormView> {
         actions: [
           TextButton(onPressed: (){ if(Navigator.canPop(context)) Navigator.pop(context);}, child: Text("Cancelar")),
           TextButton(onPressed: (){ _accountFormCubit.onValidate(); }, child: Text("Aceptar")),
+
+          BlocListener<AccountFormCubit,AccountFormState>(
+            listener: (context, state){
+              if(state.submitionStatus == SubmitionStatus.success){
+                if(Navigator.canPop(context)) Navigator.pop(context);
+              }
+            },
+            child: SizedBox.shrink(),
+          )
+
+
         ],
       ),
     );
