@@ -1,8 +1,8 @@
 import 'package:formz/formz.dart';
 
-class Balance extends FormzInput<String, BalanceValidationError>{
-  const Balance.validated(  [String value = '0.00']):super.dirty(value);
-  const Balance.unvalidated([String value = '0.00']):super.pure(value); 
+class BalanceFormField extends FormzInput<String, BalanceValidationError>{
+  const BalanceFormField.validated(  [String value = '0.00']):super.dirty(value);
+  const BalanceFormField.unvalidated([String value = '0.00']):super.pure(value); 
 
 
   @override

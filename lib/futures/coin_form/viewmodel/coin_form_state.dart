@@ -2,7 +2,7 @@ import 'package:cuban_seller/futures/form_fields/coin.dart';
 
 
 class CoinFormState {
-  final Coin coin;
+  final CoinFormField coin;
   final SubmitionStatus submitionStatus;
 
   const CoinFormState({
@@ -12,7 +12,7 @@ class CoinFormState {
 
 
   CoinFormState copyWith({
-    Coin ? coin,
+    CoinFormField ? coin,
     SubmitionStatus ? submitionStatus
   }){
     return CoinFormState(

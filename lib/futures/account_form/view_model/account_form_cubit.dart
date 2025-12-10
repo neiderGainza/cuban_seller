@@ -18,9 +18,9 @@ class AccountFormCubit extends Cubit<AccountFormState>{
   }): _accountRepository = accountRepository, _coinRepository = coinRepository,
   super( 
     const AccountFormState(
-      name:     Name.unvalidated(), 
-      balance:  Balance.unvalidated(), 
-      coin:     Coin.unvalidated(), 
+      name:     NameFormField.unvalidated(), 
+      balance:  BalanceFormField.unvalidated(), 
+      coin:     CoinFormField.unvalidated(), 
       submitionStatus: SubmitionStatus.loading
     )
   ){
@@ -38,20 +38,20 @@ class AccountFormCubit extends Cubit<AccountFormState>{
   }
 
   // Special Validators
-  Name _validateNameIfNecesary(String newValue, [bool forceValidation = false]){
+  NameFormField _validateNameIfNecesary(String newValue, [bool forceValidation = false]){
     // aqui validaciones con el backend
     // if (_accountRepository.containsName(NewValue)) newName = Name.alreadyInUse(newValue);
 
     return (state.name.displayError != null || forceValidation)
-      ? Name.validated(newValue)
-      : Name.unvalidated(newValue);
+      ? NameFormField.validated(newValue)
+      : NameFormField.unvalidated(newValue);
   }
 
-  Coin _validateCoinIfNecesary(String ? newValue, [bool forceValidation = false]){
+  CoinFormField _validateCoinIfNecesary(String ? newValue, [bool forceValidation = false]){
     newValue = newValue??'';
     return (state.coin.displayError != null || forceValidation)
-      ? Coin.validated(newValue)
-      : Coin.unvalidated(newValue);
+      ? CoinFormField.validated(newValue)
+      : CoinFormField.unvalidated(newValue);
   }
 
 
@@ -61,7 +61,7 @@ class AccountFormCubit extends Cubit<AccountFormState>{
   }
 
   void onBalanceChanged(String newValue){
-    emit( state.copyWith(balance: Balance.validated(newValue)) );
+    emit( state.copyWith(balance: BalanceFormField.validated(newValue)) );
   }
 
   void onCoinChanged(String ? newValue){
@@ -81,7 +81,7 @@ class AccountFormCubit extends Cubit<AccountFormState>{
 
   // general validation
   void onValidate(){
-    final balance = Balance.validated(state.balance.value);
+    final balance = BalanceFormField.validated(state.balance.value);
     final name    = _validateNameIfNecesary(state.name.value,true);
     final coin    = _validateCoinIfNecesary(state.coin.value,true);
     

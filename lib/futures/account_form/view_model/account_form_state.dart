@@ -4,9 +4,9 @@ import 'package:cuban_seller/futures/form_fields/name.dart';
 
 
 class AccountFormState {
-  final Name name;
-  final Balance balance;
-  final Coin coin;
+  final NameFormField name;
+  final BalanceFormField balance;
+  final CoinFormField coin;
   
   final SubmitionStatus submitionStatus;
   final List<String> coins;
@@ -22,9 +22,10 @@ class AccountFormState {
 
 
   AccountFormState copyWith({
-    Name ? name,
-    Balance ? balance,
-    Coin ? coin,
+    NameFormField ? name,
+    BalanceFormField ? balance,
+    CoinFormField ? coin,
+    
     SubmitionStatus ? submitionStatus,
     List<String> ? coins 
   }){

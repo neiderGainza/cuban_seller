@@ -1,11 +1,11 @@
 import 'package:formz/formz.dart';
 
-class Coin extends FormzInput<String, CoinValidationError>{
+class CoinFormField extends FormzInput<String, CoinValidationError>{
   // inicializa el field sin validar
-  const Coin.unvalidated([String value = '']) : super.pure(value);
+  const CoinFormField.unvalidated([String value = '']) : super.pure(value);
   
   // inicializa el field validando
-  const Coin.validated(  [String value = '']) : super.dirty(value);
+  const CoinFormField.validated(  [String value = '']) : super.dirty(value);
   
 
   @override CoinValidationError? validator(String value) {

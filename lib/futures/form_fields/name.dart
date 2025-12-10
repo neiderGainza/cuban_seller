@@ -1,19 +1,19 @@
 import 'package:formz/formz.dart';
 
 
-class Name extends FormzInput<String, NameValidationError>{
+class NameFormField extends FormzInput<String, NameValidationError>{
   final bool nameAlreadyInUse;
   
   // inicializa el field sin validar
-  const Name.unvalidated([String value = ''])
+  const NameFormField.unvalidated([String value = ''])
     : nameAlreadyInUse = false, super.pure(value);
   
   // inicializa el field validando
-  const Name.validated(  [String value = ''])
+  const NameFormField.validated(  [String value = ''])
     : nameAlreadyInUse = false, super.dirty(value);
   
   // inicializa el field con nameAlreadyinUse
-  const Name.alreadyInUse([String value =''])
+  const NameFormField.alreadyInUse([String value =''])
     : nameAlreadyInUse = true,  super.dirty(value);
 
 

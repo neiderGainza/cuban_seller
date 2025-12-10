@@ -10,18 +10,18 @@ class CoinFormCubit extends Cubit<CoinFormState>{
   ) : _coinRepository = coinRepository, 
   super(
     CoinFormState(
-      coin: Coin.unvalidated(), 
+      coin: CoinFormField.unvalidated(), 
       submitionStatus: SubmitionStatus.still
     )
   );
 
   final _coinRepository;
 
-  Coin _validateCoinIfNecesary(String newValue, [bool forceValidation = false]){
+  CoinFormField _validateCoinIfNecesary(String newValue, [bool forceValidation = false]){
     // aqui validaciones con el backend 
     return (state.coin.displayError != null || forceValidation)
-      ? Coin.validated(newValue)
-      : Coin.unvalidated(newValue);
+      ? CoinFormField.validated(newValue)
+      : CoinFormField.unvalidated(newValue);
   }
 
 
