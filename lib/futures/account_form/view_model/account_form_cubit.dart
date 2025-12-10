@@ -9,13 +9,14 @@ import 'package:formz/formz.dart';
 class AccountFormCubit extends Cubit<AccountFormState>{
   final _accountRepository;
   final _coinRepository;
-
+  final _account;
 
   AccountFormCubit({
     accountRepository,
     coinRepository,
 
-  }): _accountRepository = accountRepository, _coinRepository = coinRepository,
+    account
+  }): _accountRepository = accountRepository, _coinRepository = coinRepository, _account = account,
   super( 
     const AccountFormState(
       name:     NameFormField.unvalidated(), 
@@ -25,6 +26,17 @@ class AccountFormCubit extends Cubit<AccountFormState>{
     )
   ){
     getCoins();
+
+    if(_account != null){
+      // obtener coin from _account
+      emit(
+        state.copyWith(
+          name    : NameFormField.unvalidated(_account.name),
+          coin    : CoinFormField.unvalidated(), // falta agregarle la moneda inicial,
+          balance : BalanceFormField.unvalidated(_account.balance) 
+        )
+      );
+    } 
   }
 
   // leer de manera asincrona las coins
@@ -94,7 +106,7 @@ class AccountFormCubit extends Cubit<AccountFormState>{
 
     if (isFormValid){
       // insertar el form
-            
+      // si _account != null update on account_id
     }
 
     emit(

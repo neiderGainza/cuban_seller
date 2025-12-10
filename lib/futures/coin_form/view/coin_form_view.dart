@@ -39,8 +39,8 @@ class _CoinFormViewState extends State<CoinFormView> {
                     content: Text("${state.coin.value} agregado") 
                   )
               );
-          } if(state.submitionStatus == SubmitionStatus.inProgress){
-            // si esta carganddo no se que hacer
+          } if(state.submitionStatus == SubmitionStatus.reject){
+            // si fue rechazado
           }
       },
 
