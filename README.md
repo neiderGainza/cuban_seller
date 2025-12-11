@@ -20,3 +20,10 @@ Antes de ejecutarlo, asegúrate de tener Flutter instalado y configurado correct
 >```
 >dart run build_runner build
 >```
+
+### 🧪 Requisitos para ejecutar los tests
+
+>Si estás en **Linux**, asegúrate de tener instaladas las dependencias de SQLite antes de correr los tests:
+> ```
+>sudo apt-get install sqlite3 libsqlite3-dev
+> ```

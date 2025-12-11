@@ -30,9 +30,14 @@ class AccountMapper {
     UpdateAccountParam param,
   ) {
     return AccountModelCompanion(
-      name: Value(param.name!),
-      amount: Value(param.amount!),
-      coinValue: Value(param.coin!.value),
+      id: Value(id),
+      name: param.name != null ? Value(param.name!) : const Value.absent(),
+      amount: param.amount != null
+          ? Value(param.amount!)
+          : const Value.absent(),
+      coinValue: param.coin != null
+          ? Value(param.coin!.value)
+          : const Value.absent(),
     );
   }
 }

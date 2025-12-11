@@ -64,9 +64,9 @@ class AppDatabase extends _$AppDatabase {
 
     final success = await (update(
       accountModel,
-    )..where((tbl) => tbl.id.equals(id))).replace(companion);
+    )..where((tbl) => tbl.id.equals(id))).write(companion);
 
-    if (!success) {
+    if (!(success > 0)) {
       return null;
     }
 
