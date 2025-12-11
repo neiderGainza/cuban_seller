@@ -31,4 +31,12 @@ class AccountRepositoryImplement implements AccountRepository {
   Future<Account?> updateAccount(int id, UpdateAccountParam account) async {
     return await _appDatabase.updateAccount(id, account);
   }
+
+
+  @override
+  Stream<List<Account>> getStreamAccounts() async *{
+    await for(final accounts in _appDatabase.managers.accountModel.watch()){
+      yield _appDatabase.castAccountsToEntity(accounts);
+    }
+  }
 }

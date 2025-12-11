@@ -1,29 +1,31 @@
+import 'package:cuban_seller/data_access/account/domain/entities/account.dart';
 import 'package:cuban_seller/data_access/account/domain/repositories/account_repository.dart';
-import 'package:cuban_seller/features/account_list/view_model/account_list_event.dart';
 import 'package:cuban_seller/features/account_list/view_model/account_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AccountListBloc extends Bloc<AccountListEvent, AccountListState>{
-  AccountListBloc({
+class AccountListCubit extends Cubit<AccountListState>{
+  AccountListCubit({
     required AccountRepository accountRepository
   }): _accountRepository = accountRepository, 
   super(
     AccountListState(acounts: [])
   ){
-    on<AccountListChanged>( onAccountListChanged );
-
-
-    add(AccountListChanged());
+    _listenToAccountUpdates();
   }
 
   final AccountRepository _accountRepository;
 
-
-  void onAccountListChanged(AccountListChanged event, Emitter emit) async {
+  void updateAccountList(List<Account> accounts){
     emit(
       state.copyWith(
-        acounts: await _accountRepository.getAccounts() 
+        acounts: accounts
       )
+    );
+  }
+
+  void _listenToAccountUpdates(){
+    _accountRepository.getStreamAccounts().listen(
+      (accounts) => updateAccountList(accounts)
     );
   }
 }

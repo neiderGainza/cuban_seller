@@ -1,4 +1,4 @@
-import 'package:cuban_seller/features/account_list/view_model/account_list_bloc.dart';
+import 'package:cuban_seller/features/account_list/view_model/account_list_cubit.dart';
 import 'package:cuban_seller/features/account_list/view_model/account_list_state.dart';
 import 'package:cuban_seller/features/account_list/widgets/account_list.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class AccountGrid extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountListBloc, AccountListState>(
+    return BlocBuilder<AccountListCubit, AccountListState>(
       builder: (context, state) {
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

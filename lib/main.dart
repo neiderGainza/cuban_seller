@@ -43,7 +43,7 @@ void main() async {
     accountRepository: accountRepository, 
     coinRepository: coinRepository, 
     onAddNewCoin:
-    (context) => showDialog<String>(
+    (context) => showDialog(
       context: context, 
       builder: (context) => coinFormView
     )
@@ -63,31 +63,37 @@ void main() async {
     routes: [
       ShellRoute(
         builder: (context, state, child){
+          
           return navigationFrame.copyWith(
-            body: child
+            body: child,
           );
+
         },
         routes: [
           // cuentas
           GoRoute(
+            name: 'Cuentas',
             path: '/',
             builder: (context, state) => accountListView
           ),
           
           // productos
           GoRoute(
+            name: 'Productos',
             path: '/products',
             builder: (context,state) => ProductListView()
           ),
           
           // shoping
           GoRoute(
+            name: 'Compras',
             path: '/shop',
             builder: (context,state) => ShopListView()
           ),
 
           // selling
           GoRoute(
+            name: 'Ventas',
             path: '/sell',
             builder: (context,state) => SellListView()
           ),

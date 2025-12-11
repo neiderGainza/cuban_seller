@@ -23,35 +23,24 @@ class AccountFormCubit extends Cubit<AccountFormState>{
   }): _accountRepository = accountRepository, _coinRepository = coinRepository, _account = account,
   super( 
     const AccountFormState(
-      name:     NameFormField.unvalidated(), 
-      balance:  BalanceFormField.unvalidated(), 
-      coin:     CoinFormField.unvalidated(), 
+      name           : NameFormField.unvalidated(), 
+      balance        : BalanceFormField.unvalidated(), 
+      selectedCoin   : 0, 
       submitionStatus: SubmitionStatus.loading
     )
   ){
-    getCoins();
-
-    if(_account != null){
-      // obtener coin from _account
-      emit(
-        state.copyWith(
-          name    : NameFormField.unvalidated(_account.name),
-          coin    : CoinFormField.unvalidated(), // falta agregarle la moneda inicial,
-          balance : BalanceFormField.unvalidated(_account.balance) 
-        )
-      );
-    } 
+    _subscribeToCoinsChenge();
   }
 
-  // leer de manera asincrona las coins
-  void getCoins() async {
-    final coins = await _coinRepository.getAllCoins();
-    emit(
-      state.copyWith(
-        coins: coins,
-        submitionStatus: SubmitionStatus.loaded
-      )
-    );
+  void _subscribeToCoinsChenge() async {
+    await for (final coins in _coinRepository.getStreamAllCoins()){
+      emit(
+        state.copyWith(
+          coins: coins,
+          submitionStatus: SubmitionStatus.loaded
+        )
+      );
+    }
   }
 
   // Special Validators
@@ -64,14 +53,6 @@ class AccountFormCubit extends Cubit<AccountFormState>{
       : NameFormField.unvalidated(newValue);
   }
 
-  CoinFormField _validateCoinIfNecesary(String ? newValue, [bool forceValidation = false]){
-    newValue = newValue??'';
-    return (state.coin.displayError != null || forceValidation)
-      ? CoinFormField.validated(newValue)
-      : CoinFormField.unvalidated(newValue);
-  }
-
-
   /// UI
   void onNameChanged(String newValue){
     emit( state.copyWith(name: _validateNameIfNecesary(newValue)) );
@@ -81,51 +62,40 @@ class AccountFormCubit extends Cubit<AccountFormState>{
     emit( state.copyWith(balance: BalanceFormField.validated(newValue)) );
   }
 
-  void onCoinChanged(String ? newValue){
-    emit( state.copyWith(coin: _validateCoinIfNecesary(newValue)) );
+  void onCoinChanged(int ? newValue){
+    emit( state.copyWith(selectedCoin: newValue) );
   }
 
-
-  void onCoinAdded(String value){
-    emit(
-      state.copyWith(
-        coin: _validateCoinIfNecesary(value),
-        coins: [...state.coins, Coin(value: value)]
-      )
-    );
-  }
-
-
+  
   // general validation
   void onValidate(){
     final balance = BalanceFormField.validated(state.balance.value);
     final name    = _validateNameIfNecesary(state.name.value,true);
-    final coin    = _validateCoinIfNecesary(state.coin.value,true);
-    
 
+    final isThereCoinSelected = state.selectedCoin != state.coins.length;
+    
     final isFormValid = Formz.validate([
       balance,
       name,
-      coin
     ]);    
 
-    if (isFormValid){
+
+    if (isFormValid && isThereCoinSelected){
       _accountRepository.insertAccount(
         // should i put a try
         InsertAccountParam(
-          name: name.value,
+          name:   name.value,
           amount: double.parse( balance.value ), 
-          coin: Coin(value: coin.value)
+          coin:   state.coins[state.selectedCoin]
         )
       );
-      // si _account != null update on account_id
+    
     }
-
+    
     emit(
       state.copyWith(
         balance : balance,
         name    : name,
-        coin    : coin,
         submitionStatus: isFormValid ? SubmitionStatus.success : SubmitionStatus.rejected 
       )
     );

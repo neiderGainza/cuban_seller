@@ -35,4 +35,17 @@ class CoinRepositoryImplement implements CoinRepository {
       rethrow;
     }
   }
+
+
+  // Neider : metodo para tomar todas las coins como stream
+  @override
+  Stream<List<Coin>> getStreamAllCoins() async*{
+    try {
+      await for (final coins in  _database.managers.coinModel.watch()){
+        yield _database.castCoinToEntity(coins);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -6,5 +6,8 @@ abstract class AccountRepository {
   Future<Account?> insertAccount(InsertAccountParam account);
   Future<Account?> updateAccount(int id, UpdateAccountParam account);
   Future<bool> deleteAccount(int id);
+  
   Future<List<Account>> getAccounts();
+  // Neider : para obtener las account como un stream
+  Stream<List<Account>> getStreamAccounts();
 }

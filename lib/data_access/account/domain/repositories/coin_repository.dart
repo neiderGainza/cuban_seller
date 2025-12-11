@@ -6,5 +6,8 @@ abstract class CoinRepository {
 
   Future<List<Coin>> getAllCoins();
 
+  // Neider : metodo para tomar un stream de las coins
+  Stream<List<Coin>> getStreamAllCoins();
+
   Future<bool> deleteCoin(CoinParameters value);
 }

@@ -7,7 +7,7 @@ import 'package:cuban_seller/features/form_fields/name.dart';
 class AccountFormState {
   final NameFormField name;
   final BalanceFormField balance;
-  final CoinFormField coin;
+  final int selectedCoin;
   
   final SubmitionStatus submitionStatus;
   final List<Coin> coins;
@@ -15,7 +15,7 @@ class AccountFormState {
   const AccountFormState({
     required this.name,
     required this.balance,
-    required this.coin,
+    required this.selectedCoin,
     
     required this.submitionStatus,
     this.coins = const []
@@ -25,7 +25,7 @@ class AccountFormState {
   AccountFormState copyWith({
     NameFormField ? name,
     BalanceFormField ? balance,
-    CoinFormField ? coin,
+    int ? selectedCoin,
     
     SubmitionStatus ? submitionStatus,
     List<Coin> ? coins 
@@ -33,7 +33,7 @@ class AccountFormState {
     return AccountFormState(
       name: name ?? this.name,
       balance: balance??this.balance,
-      coin: coin ?? this.coin,
+      selectedCoin: selectedCoin ?? this.selectedCoin,
       submitionStatus: submitionStatus ?? this.submitionStatus,
       coins: coins ?? this.coins
     );

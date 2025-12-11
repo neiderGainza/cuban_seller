@@ -1,9 +1,7 @@
 import 'package:cuban_seller/data_access/account/domain/repositories/account_repository.dart';
-import 'package:cuban_seller/features/account_list/view_model/account_list_bloc.dart';
-import 'package:cuban_seller/features/account_list/view_model/account_list_event.dart';
+import 'package:cuban_seller/features/account_list/view_model/account_list_cubit.dart';
 import 'package:cuban_seller/features/account_list/widgets/account_grid.dart';
 import 'package:cuban_seller/features/account_list/widgets/account_list.dart';
-import 'package:cuban_seller/features/account_list/widgets/search_bar/cuban_seller_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,9 +18,9 @@ class AccountListView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    final accountListBloc = AccountListBloc(accountRepository: _accountRepository); 
+    final accountListBloc = AccountListCubit(accountRepository: _accountRepository); 
 
-    return BlocProvider<AccountListBloc>(
+    return BlocProvider<AccountListCubit>(
       create: (context) => accountListBloc,
       child: Stack(
         
@@ -35,11 +33,7 @@ class AccountListView extends StatelessWidget{
             right: 16,
             bottom: 16,
             child: FloatingActionButton(
-              onPressed: (){
-                onAddNewAccount(context).then(
-                  (_)=>accountListBloc.add(AccountListChanged())
-                );
-              },
+              onPressed: (){ onAddNewAccount(context); },
               child: Icon(Icons.add, color: Theme.of(context).colorScheme.onPrimaryContainer,),
             ),
           ),
@@ -57,14 +51,15 @@ class AccountListView extends StatelessWidget{
 
     return Column(
       children: [
-        SizedBox(
-          height: 56,
-          child: AppBar(
-            backgroundColor: colors.primary,
-            title: Text("Cuentas", style: TextStyle(color: colors.onPrimary),),
+        SafeArea(
+          child: SizedBox(
+            height: 56,
+            child: AppBar(
+              backgroundColor: colors.primary,
+              title: Text("Cuentas", style: TextStyle(color: colors.onPrimary),),
+            ),
           ),
         ),
-        SizedBox(height:112 ,child: CubanSellerSearchBar(theme: theme,)),
         Expanded(child: AccountList())
       ],
     );
@@ -72,14 +67,7 @@ class AccountListView extends StatelessWidget{
   }
 
   Widget desktopView(BuildContext context){
-    final theme = Theme.of(context);
-
-    return Column(
-      children: [
-        SizedBox(height: 64,child: CubanSellerSearchBar(theme: theme, mobile: false,)),
-        Expanded(child: AccountGrid())
-      ],
-    );
+    return AccountGrid();
   }
 
 

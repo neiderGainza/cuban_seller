@@ -1,4 +1,4 @@
-import 'package:cuban_seller/features/account_list/view_model/account_list_bloc.dart';
+import 'package:cuban_seller/features/account_list/view_model/account_list_cubit.dart';
 import 'package:cuban_seller/features/account_list/view_model/account_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +12,7 @@ class AccountList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountListBloc, AccountListState>(
+    return BlocBuilder<AccountListCubit, AccountListState>(
       builder: (context, state){
         return ListView.builder(
           itemBuilder: (context, index) {

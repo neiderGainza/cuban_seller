@@ -51,6 +51,11 @@ class AppDatabase extends _$AppDatabase {
     return rows.map(AccountMapper.toEntity).toList();
   }
 
+  /// Neider : to cast to Account Entity
+  List<Account> castAccountsToEntity(List<AccountModelData> accounts){
+    return accounts.map( AccountMapper.toEntity ).toList();
+  }
+
   /// Actualiza una cuenta y retorna la cuenta actualizada, o null si no existe.
   Future<Account?> updateAccount(int id, UpdateAccountParam param) async {
     // Comprobar que existe
@@ -114,6 +119,11 @@ class AppDatabase extends _$AppDatabase {
   Future<List<Coin>> get allCoins async {
     final rows = await select(coinModel).get();
     return rows.map(CoinMapper.toEntity).toList();
+  }
+
+  // Neider : para mapear la lista a Coin Entity
+  List<Coin> castCoinToEntity(List<CoinModelData> coins){
+    return coins.map((item) => CoinMapper.toEntity(item)).toList();
   }
 
   // ---------------- DB CONNECTION ----------------
