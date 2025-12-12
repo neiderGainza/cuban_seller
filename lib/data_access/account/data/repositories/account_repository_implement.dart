@@ -31,4 +31,9 @@ class AccountRepositoryImplement implements AccountRepository {
   Future<Account?> updateAccount(int id, UpdateAccountParam account) async {
     return await _appDatabase.updateAccount(id, account);
   }
+
+  @override
+  Future<List<Account>> getAccountsByName(String name) {
+    return _appDatabase.getAccountsByName(name);
+  }
 }

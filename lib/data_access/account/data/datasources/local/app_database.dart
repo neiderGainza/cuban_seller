@@ -28,6 +28,10 @@ class AppDatabase extends _$AppDatabase {
   int get schemaVersion => 1;
 
   // ---------------- ACCOUNT METHODS ----------------
+  Future<List<Account>> getAccountsByName(String name) async {
+    final query = select(accountModel)..where((t) => t.name.like('$name%'));
+    return query.map(AccountMapper.toEntity).get();
+  }
 
   /// Inserta una cuenta nueva y retorna la entidad de dominio.
   Future<Account?> insertAccount(InsertAccountParam param) async {

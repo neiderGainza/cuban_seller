@@ -7,4 +7,5 @@ abstract class AccountRepository {
   Future<Account?> updateAccount(int id, UpdateAccountParam account);
   Future<bool> deleteAccount(int id);
   Future<List<Account>> getAccounts();
+  Future<List<Account>> getAccountsByName(String name);
 }
