@@ -102,6 +102,46 @@ void main() {
     },
   );
   test(
+    'getAccountsByName devuelve todas las cuentas que coinciden con el nombre',
+    () async {
+      final param1 = InsertAccountParam(
+        name: 'ABBCCCDDDD',
+        amount: 200.0,
+        coin: Coin(value: 'USD'),
+      );
+      final param2 = InsertAccountParam(
+        name: 'ABCDEFGHIJ',
+        amount: 200.0,
+        coin: Coin(value: 'USD'),
+      );
+      final param3 = InsertAccountParam(
+        name: 'XYZ',
+        amount: 200.0,
+        coin: Coin(value: 'USD'),
+      );
+
+      await db.insertAccount(param1);
+      await db.insertAccount(param2);
+      await db.insertAccount(param3);
+
+      final accounts = await db.getAccountsByName("A");
+      final accounts1 = await db.getAccountsByName("X");
+      final accounts2 = await db.getAccountsByName("");
+      final accounts3 = await db.getAccountsByName("Z");
+
+      expect(accounts.length, 2);
+      expect(accounts[0].name, 'ABBCCCDDDD');
+      expect(accounts[1].name, 'ABCDEFGHIJ');
+
+      expect(accounts1.length, 1);
+      expect(accounts1[0].name, 'XYZ');
+
+      expect(accounts2.length, 3);
+
+      expect(accounts3.length, 0);
+    },
+  );
+  test(
     'updateAccount actualiza solo el amount de la cuenta y devuelve la cuenta actualizada',
     () async {
       final insertParam = InsertAccountParam(

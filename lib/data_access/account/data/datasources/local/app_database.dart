@@ -29,6 +29,12 @@ class AppDatabase extends _$AppDatabase {
 
   // ---------------- ACCOUNT METHODS ----------------
 
+  /// Obtiene las cuentas cuyo nombre comienza con el string dado.
+  Future<List<Account>> getAccountsByName(String name) async {
+    final query = select(accountModel)..where((t) => t.name.like('$name%'));
+    return query.map(AccountMapper.toEntity).get();
+  }
+
   /// Inserta una cuenta nueva y retorna la entidad de dominio.
   Future<Account?> insertAccount(InsertAccountParam param) async {
     final companion = AccountMapper.toCompanionFromInsertParam(param);
@@ -52,8 +58,8 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Neider : to cast to Account Entity
-  List<Account> castAccountsToEntity(List<AccountModelData> accounts){
-    return accounts.map( AccountMapper.toEntity ).toList();
+  List<Account> castAccountsToEntity(List<AccountModelData> accounts) {
+    return accounts.map(AccountMapper.toEntity).toList();
   }
 
   /// Actualiza una cuenta y retorna la cuenta actualizada, o null si no existe.
@@ -122,7 +128,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   // Neider : para mapear la lista a Coin Entity
-  List<Coin> castCoinToEntity(List<CoinModelData> coins){
+  List<Coin> castCoinToEntity(List<CoinModelData> coins) {
     return coins.map((item) => CoinMapper.toEntity(item)).toList();
   }
 
